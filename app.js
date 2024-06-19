@@ -7,19 +7,23 @@ const {app, BrowserWindow} = require('electron')
     function createWindow () {
       mainWindow = new BrowserWindow({
         width: 1600,
-        height: 800,
+        height: 1000,
         webPreferences: {
-          nodeIntegration: true
+          nodeIntegration: true,
+          contextIsolation: false,
         }
       })
 
-      mainWindow.loadURL(
-        url.format({
-          pathname: path.join(__dirname, `/dist/logic-sim/browser/index.html`),
-          protocol: "file:",
-          slashes: true
-        })
-      );
+      // mainWindow.loadURL(
+      //   url.format({
+      //     pathname: path.join(__dirname, `/dist/logic-sim/browser/index.html`),
+      //     protocol: "file:",
+      //     slashes: true
+      //   })
+      // );
+
+      mainWindow.loadFile('dist/logic-sim/index.html')
+
       // Open the DevTools.
       mainWindow.webContents.openDevTools()
 
