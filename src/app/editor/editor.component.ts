@@ -59,6 +59,55 @@ export class EditorComponent implements OnInit, AfterViewInit {
       lockRotation: true,
     }).setControlsVisibility({mtr: false})
 
+
+    const gateHeight = 100
+    const gateWidth = 80        
+    const gateArcX = 50
+    const gateArcY = 40
+
+    const andGate = new fabric.Group([
+      new fabric.Path(`M 0 0 L 0 ${gateHeight} L ${gateWidth} ${gateHeight} A ${gateArcX} ${gateArcY} 0 0 0 ${gateHeight} 0 Z `, {
+      stroke: '#000000',
+      strokeWidth: 5,
+      fill: '',
+      originX: 'left',
+      originY: 'top'
+      }),
+      new fabric.Rect({
+        width: 10,
+        height: 10,
+        left: -10,
+        top: 20,
+        fill: "red",
+        originX: "left",
+        originY: "top",
+      }),
+      new fabric.Rect({
+        width: 10,
+        height: 10,
+        left: -10,
+        top: 70,
+        fill: "red",
+        originX: "left",
+        originY: "top",
+      }),
+      new fabric.Circle({
+        radius: 5,
+        left: 140,
+        top: 45,
+        fill: "red",
+        originX: "left",
+        originY: "top",
+      })
+    ],
+    {
+      left: 300,
+      top: 300
+    }
+    )
+    
+
+    canvas.add(andGate);
     canvas.add(g);
     
   }
