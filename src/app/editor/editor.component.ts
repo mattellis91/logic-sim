@@ -76,7 +76,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
     }).setControlsVisibility({mtr: false})
 
 
-    const gateHeight = 100
+    const gateHeight = 80
     const gateWidth = 60        
     const gateArc = 40
 
@@ -125,6 +125,25 @@ export class EditorComponent implements OnInit, AfterViewInit {
     }
     ).setControlsVisibility({mtr: false, mt: false, mb: false, ml: false, mr: false, bl: false, br: false, tl: false, tr: false})
 
+    const orGate = new fabric.Group([
+      new fabric.Path(`M 0 0 Q 30 45 0 100 Q 100 100 100 50 T 0 0`, {
+        stroke: '#000000',
+        strokeWidth: 5,
+        fill: '',
+        originX: 'left',
+        originY: 'top'
+        }),
+    ], {
+      left: 300,
+      top: 50,
+      flipX: false,
+      centeredRotation: true,
+      lockScalingX: true,
+      lockScalingY: true,
+    }
+    ).setControlsVisibility({mtr: false, mt: false, mb: false, ml: false, mr: false, bl: false, br: false, tl: false, tr: false
+    })
+
 
     const notGate = new fabric.Group([
       new fabric.Triangle({
@@ -165,6 +184,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
     canvas.add(andGate);
     canvas.add(notGate);
     canvas.add(g);
+    canvas.add(orGate);
     
   }
 
