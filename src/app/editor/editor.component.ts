@@ -26,7 +26,6 @@ export class EditorComponent implements OnInit, AfterViewInit {
     console.log(this.editor.nativeElement.width = window.innerWidth);
     console.log(this.editor.nativeElement.height = window.innerHeight);
     const canvas = new fabric.Canvas('editor');
-    canvas.backgroundColor = '#f0f0f0';
     canvas.add(new fabric.Rect({
       left: 100,
       top: 100,
@@ -35,20 +34,30 @@ export class EditorComponent implements OnInit, AfterViewInit {
       height: 20
     }));
 
-    const cHeight = canvas.height ?? 0;
-    const cWidth = canvas.width ?? 0;
+    const cHeight = window.innerHeight;
+    const cWidth = window.innerWidth;
 
-    // for(let i = 0; i < cHeight; i += 2) {
-    //   for(let j = 0; j < cWidth; j += 2) {
-    //     canvas.add(new fabric.Rect({
-    //       left: j,
-    //       top: i,
-    //       fill: 'black',
-    //       width: 2,
-    //       height: 2
-    //     }))
-    //   }
-    // }
+    console.log(cHeight, cWidth);
+
+    for(let i = 0; i < cHeight; i += 20) {
+      for(let j = 0; j < cWidth; j += 20) {
+        canvas.add(new fabric.Rect({
+          left: j,
+          top: i,
+          fill: 'black',
+          width: 2,
+          height: 2
+        }))
+        console.log(i, j)
+      }
+    }
+
+    canvas.on('object:moving', (opts) =>{
+      opts.target?.set({
+        left: Math.round(opts.target?.left! / 20) * 20,
+        top: Math.round(opts.target?.top! / 20) * 20
+      })
+    })
     
 
     //create gates using groups
@@ -84,9 +93,9 @@ export class EditorComponent implements OnInit, AfterViewInit {
       new fabric.Path(`M 0 0 L 0 ${gateHeight} L ${gateWidth} ${gateHeight} A ${gateArc} ${gateArc} 0 0 0 ${gateWidth} 0 Z `, {
       stroke: '#000000',
       strokeWidth: 5,
-      fill: '',
+      fill: 'white',
       originX: 'left',
-      originY: 'top'
+      originY: 'top',
       }),
       new fabric.Rect({
         width: 10,
@@ -129,7 +138,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
       new fabric.Path(`M 0 0 Q 30 45 0 100 Q 100 100 100 50 T 0 0`, {
         stroke: '#000000',
         strokeWidth: 5,
-        fill: '',
+        fill: 'white',
         originX: 'left',
         originY: 'top'
         }),
@@ -149,7 +158,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
       new fabric.Triangle({
         width: 40,
         height: 60,
-        fill: '',
+        fill: 'white',
         stroke: 'black',
         strokeWidth: 5,
         originX: 'left',
